@@ -34,27 +34,6 @@ const Popup = ({ open, closePopup, picketDay, reserveDay }) => {
     }
 
     const formValidate = (form) => {
-        form.elements["phone"].addEventListener("keypress", (e) => {
-            const length = e.target.value.length;
-            if (e.charCode < 48 || e.charCode > 57 || length > 14) {
-                e.preventDefault();
-                return;
-            }
-            switch (length) {
-                case 0: 
-                    e.target.value = "8 " ;
-                    break;
-                case 5:
-                case 9:
-                case 12:
-                    e.target.value += " ";
-                    break;
-                default:
-                    break;
-            }
-        })
-        form.elements["phone"].addEventListener("input", e => {e.target.value.length === 2 && (e.target.value = "")})
-
         let errors = 0;
 
         if (form.elements["name"].value.trim() === "")
@@ -69,13 +48,35 @@ const Popup = ({ open, closePopup, picketDay, reserveDay }) => {
         return true
     }
 
+    const handleKeyPress = (e) => {
+        const length = e.target.value.length;
+        if (e.charCode < 48 || e.charCode > 57 || length > 14) {
+            e.preventDefault();
+            return;
+        }
+        switch (length) {
+            case 0: 
+                e.target.value = "8 " ;
+                break;
+            case 5:
+            case 9:
+            case 12:
+                e.target.value += " ";
+                break;
+            default:
+                break;
+        }
+    }
+
+    const handleInput = e => {e.target.value.length === 2 && (e.target.value = "")}
+
     return (
         <div className="popup">
             <div className="popup__container" onClick={handleClick}>
                 <div className="popup__body">
                     <form action="#" method="POST" className="popup__form form" onSubmit={handleSubmit}>
                         <input name="name" type="name" className="form__input" placeholder="Input your name" />
-                        <input name="phone" type="tel" className="form__input" placeholder="Input your phone" />
+                        <input onKeyPress={handleKeyPress} onInput={handleInput} name="phone" type="tel" className="form__input" placeholder="Input your phone" />
                         <input name="date" type="date" className='form__input' value={getStringDate(new Date(picketDay))} disabled />
                         <button type="submit" className="form__submit">Записаться</button>
                     </form>
