@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +13,160 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.calendar {
+  background-color: #fff;
+  box-shadow: 0 0 15px 2px;  
+  border-radius: 16px;
+  padding: 10px 20px;
+  max-width: 550px;
+}
+
+.calendar__title {
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin: 10px 0;
+}
+.calendar__header {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  gap: 10px
+}
+
+.calendar__arrow {
+  border: 10px solid darkmagenta;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.calendar__arrow_prev { border-left-color: transparent }
+.calendar__arrow_next { border-right-color: transparent }
+.calendar__arrow_hide { display: none }
+
+.calendar__body {
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar__day {
+  cursor: pointer;
+  padding: 4px;
+  width: calc(100% / 7);
+}
+
+.calendar__day_disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.calendar__day_picked {
+  position: relative;
+}
+.calendar__day_picked:after {
+  background-color: darkmagenta;
+  content: "";
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 2px;
+  height: 2px;
+}
+
+.calendar__day:hover {
+  background-color: #ccc;
+}
+
+.calendar__day_disabled:hover,
+.calendar__day_picked:hover {
+  background-color: transparent
+}
+
+.calendar__hinter {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 4px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 5px;
+  position: absolute;
+  top: 100%;
+}
+
+.calendar__hinter p {
+  font-size: 12px;
+  margin: 0;
+  text-wrap: nowrap;
+}
+
+.calendar__hinter p span {
+  font-weight: bold;
+}
+
+.calendar__day_picked:hover .calendar__hinter { display: flex }
+
+.popup {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+.popup__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.popup__body {
+  background-color: #fff;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  min-width: 550px;
+  min-height: 300px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.form__input {
+  border: 1px solid #1e1e1e;
+  padding: 12px 16px;
+}
+
+.form__submit {
+  background-color: darkmagenta;
+  border-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 6px 12px;
+  transition: background-color 0.15s ease;
+}
+
+.form__submit:hover {
+  background-color: rgb(43, 9, 68);
 }
